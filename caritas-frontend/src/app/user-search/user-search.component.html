@@ -1,0 +1,70 @@
+<div class="user-search">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="name" placeholder="Ime">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="surname" placeholder="Prezime" >
+        </mat-form-field>
+      </td>
+
+      <!-- add form control -->
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="username" placeholder="Korisničko ime">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="oib" placeholder="OIB">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="E-mail" [formControl]="email">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+
+      <td><mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Datum rođenja" [formControl]="birthday">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker></mat-form-field> 
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="postalCode" placeholder="Poštanski broj">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="form-field-container">
+          <mat-select [formControl]="sex" placeholder="Odaberite spol">
+            <mat-option *ngFor="let option of sexes" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="form-field-container">
+          <mat-select [formControl]="behaviour" placeholder="Odaberite ponašanje">
+            <mat-option *ngFor="let option of behaviours" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+          <button mat-stroked-button (click)= getFilteredUsers()>Pretraži</button>
+          <button mat-stroked-button (click)= getAllUsers()>Reset</button>
+
+        </td>
+    </tr>
+  </table>
+</div>

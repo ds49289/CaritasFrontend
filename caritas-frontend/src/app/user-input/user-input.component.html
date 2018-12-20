@@ -1,0 +1,69 @@
+<div class="user-input">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="name" placeholder="Ime" required>
+          <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="surname" placeholder="Prezime" required>
+          <mat-error *ngIf="surname.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="username" placeholder="Korisničko ime">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="OIB" placeholder="OIB">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="email" placeholder="E-mail">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [formControl]="birthday" [matDatepicker]="picker" placeholder="Datum rođenja">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="postalCode" placeholder="Poštanski broj">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="form-field-container">
+          <mat-select [formControl]="sex" placeholder="Odaberite spol">
+            <mat-option *ngFor="let option of sexes" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="form-field-container">
+          <mat-select [formControl]="behaviour" placeholder="Odaberite ponašanje">
+            <mat-option *ngFor="let option of behaviours" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <button mat-stroked-button (click)="insertUser()">Unesi korisnika</button>
+      </td>
+
+    </tr>
+  </table>
