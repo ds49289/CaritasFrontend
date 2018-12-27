@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { PageEvent } from '@angular/material';
 import { Behaviour } from '../models/behaviour.model';
@@ -14,10 +14,18 @@ import { FilterResponse } from '../models/filter-response.model';
 export class UserService {
   private apiUrl = 'http://localhost:50180'
   private userApiUrl = this.apiUrl + '/Korisnici'
+  // private userSource = new BehaviorSubject<User>(2);
+  user: Observable<User>;
 
+  public messageSource;
+  public currentMessage;
 
-
+  
   constructor(private http: HttpClient) {
+  }
+
+  changeMessage(message: string){
+    this.messageSource.next(message);
   }
 
   public getAllUsers(pageIndex: number, pageSize: number, sortColumn: string, sortDirection: string): Observable<User[]> {
@@ -68,6 +76,11 @@ export class UserService {
   public getUserForId(id: number): Observable<User>{
     let url = this.apiUrl + 'Korisnik/' + id.toString();
     console.log(url);
-    return this.http.get<User>(url);
+    this.user = this.http.get<User>(url);
+    this.messageSource = new BehaviorSubject<Observable<User>>(this.user);
+    this.currentMessage = this.messageSource.asObservable();
+    this.messageSource.next();
+    console.log(this.messageSource);
+    return this.user;
   }
 }

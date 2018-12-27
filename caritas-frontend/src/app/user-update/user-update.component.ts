@@ -20,7 +20,7 @@ export class UserUpdateComponent implements OnInit {
   postalCode = new FormControl('');
 
   userData: User;
-  
+  message: string;
 
   constructor(private userService: UserService) { }
 
@@ -28,8 +28,6 @@ export class UserUpdateComponent implements OnInit {
   }
 
   getDetailsForUser(id: number){
-    console.log(id.toString());
-    this.userService.getUserForId(id).subscribe(data => this.userData = data);
-    console.log(id.toString());
+    this.userService.currentMessage.subscribe(user => this.userData = user);
   }
 }

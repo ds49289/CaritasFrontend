@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8 data-table">
-  <app-user-search (detailsOut)="getUserForId($event)" (filterOut)="getFilteredUsers($event)" (clean)="resetGrid()"></app-user-search>
+  <app-user-search (filterOut)="getFilteredUsers($event)" (clean)="resetGrid()"></app-user-search>
 
 
   <table mat-table class="full-width-table" [dataSource]="dataSource" matSort [matSortActive]="sortActive"

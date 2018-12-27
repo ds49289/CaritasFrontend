@@ -29,8 +29,6 @@ export class UserGridComponent implements OnInit {
   sortActive: string;
 
   sex = new FormControl('');
-  
-  @Output() detailsOut = new EventEmitter<number>();
 
 
   // dataSource: User[] = [new User(1,'username123','dorotea','simunovic','03842482911',
@@ -102,7 +100,6 @@ export class UserGridComponent implements OnInit {
   // }
 
   getUserForId(id:number){
-    console.log("Details button called " + id.toString());
-    this.detailsOut.emit(id);
+    this.userService.getUserForId(id);
   }
 }
