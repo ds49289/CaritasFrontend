@@ -16,6 +16,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AppDateAdapter, APP_DATE_FORMATS } from './app-date-adapter';
 import { DropdownService } from './services/dropdown.service';
 import { ServiceComponent } from './service/service.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ServiceComponent } from './service/service.component';
     UserInputComponent,
     UserSearchComponent,
     ServiceComponent,
+    UserUpdateComponent,
 
   ],
   imports: [

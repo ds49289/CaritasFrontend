@@ -1,0 +1,20 @@
+<mat-accordion (detailsOut)="getDetailsForUser($event)"  class="data-css">
+  <mat-expansion-panel class="data-css">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        User data
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <mat-label class="data-css" placeholder="oib">{{userData.oib}}</mat-label>
+    <mat-divider></mat-divider>
+    <!-- <mat-form-field>
+       
+    </mat-form-field> -->
+    <mat-label placeholder="email">{{userData.email}}</mat-label>
+    <mat-divider></mat-divider>
+    <mat-label placeholder="birthday">{{userData.birthday}}</mat-label>
+    <mat-divider></mat-divider>
+  </mat-expansion-panel>
+
+</mat-accordion>

@@ -4,6 +4,7 @@ import { UserGridComponent } from './user-grid/user-grid.component';
 import { UserInputComponent } from './user-input/user-input.component';
 import { SidenavResponsiveExample } from './navigation/sidenav-responsive';
 import { ServiceComponent } from './service/service.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 const routes: Routes = [
   { path: 'usersInput', component: UserInputComponent},
@@ -12,7 +13,9 @@ const routes: Routes = [
     pathMatch: 'full',
     component: UserGridComponent
   },
-  { path: "/openService", component: ServiceComponent}
+  { path: "openService", component: UserUpdateComponent},
+  // umjesto userupdatecomponent ide serviceComponent ovo je test
+  { path: "userUpdate", component: UserUpdateComponent}
 ]
 @NgModule({
   imports:[RouterModule.forRoot(routes)],

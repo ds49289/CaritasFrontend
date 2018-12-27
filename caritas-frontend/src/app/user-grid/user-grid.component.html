@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8 data-table">
-  <app-user-search (filterOut)="getFilteredUsers($event)" (clean)="resetGrid()"></app-user-search>
+  <app-user-search (detailsOut)="getUserForId($event)" (filterOut)="getFilteredUsers($event)" (clean)="resetGrid()"></app-user-search>
 
 
   <table mat-table class="full-width-table" [dataSource]="dataSource" matSort [matSortActive]="sortActive"
@@ -79,7 +79,11 @@
         <button mat-flat-button matTooltip="Obriši zapis" (click)="deleteData(row.id)" color="primary">
           <mat-icon>clear</mat-icon>
         </button>
+        <button mat-flat-button matTooltip="Detalji zapisa" (click)="getUserForId(row.id)" color="primary">
+          <mat-icon>info</mat-icon>
+        </button>
       </td>
+
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

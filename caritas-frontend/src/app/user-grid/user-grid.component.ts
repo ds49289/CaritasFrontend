@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { User } from '../models/user.model';
 import { Sex } from '../models/sex.model';
 import { Behaviour } from '../models/behaviour.model';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { UserFilter } from '../models/user-filter.model';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-user-grid',
@@ -18,7 +19,7 @@ import { UserFilter } from '../models/user-filter.model';
 export class UserGridComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  userForId: User;
   resultsLength: number;
   pageEvent: PageEvent;
   dataSource: User[];
@@ -28,7 +29,8 @@ export class UserGridComponent implements OnInit {
   sortActive: string;
 
   sex = new FormControl('');
-
+  
+  @Output() detailsOut = new EventEmitter<number>();
 
 
   // dataSource: User[] = [new User(1,'username123','dorotea','simunovic','03842482911',
@@ -92,5 +94,15 @@ export class UserGridComponent implements OnInit {
         }
       }
     )
+  }
+
+
+  // dataDetails(id: number){
+  //   // this.router.navigateByUrl('/updateUser');
+  // }
+
+  getUserForId(id:number){
+    console.log("Details button called " + id.toString());
+    this.detailsOut.emit(id);
   }
 }

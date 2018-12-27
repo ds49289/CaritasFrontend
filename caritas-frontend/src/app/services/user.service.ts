@@ -64,4 +64,10 @@ export class UserService {
     let url = this.apiUrl +'/Korisnik/' + id.toString();
     return this.http.delete<boolean>(url);
   }
+
+  public getUserForId(id: number): Observable<User>{
+    let url = this.apiUrl + 'Korisnik/' + id.toString();
+    console.log(url);
+    return this.http.get<User>(url);
+  }
 }
