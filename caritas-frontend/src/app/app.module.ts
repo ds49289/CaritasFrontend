@@ -15,6 +15,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { AppDateAdapter, APP_DATE_FORMATS } from './app-date-adapter';
 import { DropdownService } from './services/dropdown.service';
+import { ServiceComponent } from './service/service.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DropdownService } from './services/dropdown.service';
     UserGridComponent,
     UserInputComponent,
     UserSearchComponent,
+    ServiceComponent,
 
   ],
   imports: [

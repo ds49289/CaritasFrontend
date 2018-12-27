@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../models/user.model';
 import { Sex } from '../models/sex.model';
 import { Behaviour } from '../models/behaviour.model';
-import { MatSort, MatPaginator, PageEvent } from '@angular/material';
+import { MatSort, MatPaginator, PageEvent, MatSnackBar } from '@angular/material';
 import { UserService } from '../services/user.service';
 import { DropdownService } from '../services/dropdown.service';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class UserGridComponent implements OnInit {
   pageSize: number;
   sortDirection: string;
   sortActive: string;
- 
+
   sex = new FormControl('');
 
 
@@ -40,8 +40,8 @@ export class UserGridComponent implements OnInit {
 
 
 
-  displayedColumns = ['username','name','surname','oib','email','postalcode','birthday','sex','behaviour'];
-  constructor(private userService: UserService) { }
+  displayedColumns = ['username', 'name', 'surname', 'oib', 'email', 'postalcode', 'birthday', 'sex', 'behaviour', 'actions'];
+  constructor(private userService: UserService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.pageSize = 10;
@@ -49,28 +49,48 @@ export class UserGridComponent implements OnInit {
     this.sortActive = "oib";
     this.sortDirection = "asc";
     this.userService.getUsersCount().subscribe(x => this.resultsLength = x);
-    this.userService.getAllUsers(this.pageIndex,this.pageSize, this.sortActive, this.sortDirection).subscribe(data => this.dataSource = data);
+    this.userService.getAllUsers(this.pageIndex, this.pageSize, this.sortActive, this.sortDirection).subscribe(data => this.dataSource = data);
 
 
 
   }
 
-  getServerData(event: PageEvent){
-    this.userService.getAllUsers(this.paginator.pageIndex,this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
+  getServerData(event: PageEvent) {
+    this.userService.getAllUsers(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
   }
 
-  sortData(event: any){
+  sortData(event: any) {
     this.paginator.pageIndex = 0;
-    this.userService.getAllUsers(this.paginator.pageIndex,this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
+    this.userService.getAllUsers(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
   }
 
-  getFilteredUsers(userFilter: UserFilter){
-    console.log(JSON.stringify(userFilter));  
-    this.userService.getFilteredUsers(userFilter,0, this.paginator.pageSize,this.sort.active, this.sort.direction).subscribe(response => {
+  getFilteredUsers(userFilter: UserFilter) {
+    console.log(JSON.stringify(userFilter));
+    this.userService.getFilteredUsers(userFilter, 0, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(response => {
       this.dataSource = response.userData;
       this.resultsLength = response.count;
     });
   }
 
+  resetGrid() {
+    this.paginator.pageIndex = 0;
+    this.userService.getAllUsers(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
+  }
 
+  deleteData(id: number) {
+    this.userService.deleteData(id).subscribe(
+      response => {
+        if(response){
+          this.snackBar.open('Korisnik uspješno obrisan.', 'Zatvori',
+            { duration: 2000, panelClass: ['snackbar-added'] });
+            this.userService.getAllUsers(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(data => this.dataSource = data);
+
+        }
+        else{
+          this.snackBar.open('Korisnik neuspješno izbrisan.', 'Zatvori',
+          { duration: 2000, panelClass: ['snackbar-error'] })
+        }
+      }
+    )
+  }
 }

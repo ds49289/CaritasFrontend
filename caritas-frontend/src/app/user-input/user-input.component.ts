@@ -6,6 +6,7 @@ import { Sex } from '../models/sex.model';
 import { DropdownService } from '../services/dropdown.service';
 import { Observable } from 'rxjs';
 import { Behaviour } from '../models/behaviour.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-user-input',
@@ -28,7 +29,7 @@ export class UserInputComponent implements OnInit {
   behaviours: Behaviour[];
   filteredSexes: Observable<Sex[]>;
 
-  constructor(private userService: UserService, private dropdownService: DropdownService) { }
+  constructor(private userService: UserService, private dropdownService: DropdownService,public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -57,7 +58,8 @@ export class UserInputComponent implements OnInit {
         this.sexes.find(option => option.name === this.sex.value), 
         this.behaviours.find(option => option.name === this.behaviour.value))
       
-      this.userService.insertUser(user).subscribe();
+      this.userService.insertUser(user).subscribe(response => 
+        response ? this.snackBar.open('Uspješno dodan korisnik.', 'Zatvori', {duration: 2000, panelClass: ['snackbar-added']},) : this.snackBar.open('nespješno dodan korisnik.'))
     }
     // console.log(this.name.valid);
     // console.log(this.surname.valid);

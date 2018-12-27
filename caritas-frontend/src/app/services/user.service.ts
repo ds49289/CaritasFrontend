@@ -32,11 +32,11 @@ export class UserService {
     return this.http.get<number>(url);
   }
 
-  public insertUser(user: User): Observable<User> {
+  public insertUser(user: User): Observable<boolean> {
     let url = this.apiUrl + '/Korisnik';
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    return this.http.post<User>(url, JSON.stringify(user), { headers: headers });
+    return this.http.post<boolean>(url, JSON.stringify(user), { headers: headers });
     
   }
 
@@ -58,5 +58,10 @@ export class UserService {
     params = params.append("behaviourId", filter.behaviourId ?  filter.behaviourId.toString() : null);
 
     return this.http.get<FilterResponse>(url, {params: params});
+  }
+
+  public deleteData(id: number): Observable<boolean>{
+    let url = this.apiUrl +'/Korisnik/' + id.toString();
+    return this.http.delete<boolean>(url);
   }
 }

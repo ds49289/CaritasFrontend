@@ -1,70 +1,74 @@
-<div class="user-search">
+<div class="example-full-width" cellspacing="0">
+  <mat-grid-list cols="4" rowHeight="150px">
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput [formControl]="name" placeholder="Ime">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput [formControl]="surname" placeholder="Prezime" >
-        </mat-form-field>
-      </td>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControl]="name" placeholder="Ime">
+      </mat-form-field>
+    </mat-grid-tile>
 
-      <!-- add form control -->
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput [formControl]="username" placeholder="Korisničko ime">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput [formControl]="oib" placeholder="OIB">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="E-mail" [formControl]="email">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControl]="surname" placeholder="Prezime">
+      </mat-form-field>
+    </mat-grid-tile>
 
-      <td><mat-form-field class="example-full-width">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControl]="username" placeholder="Korisničko ime">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControl]="oib" placeholder="OIB">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="E-mail" [formControl]="email">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
         <input matInput [matDatepicker]="picker" placeholder="Datum rođenja" [formControl]="birthday">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker></mat-form-field> 
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput [formControl]="postalCode" placeholder="Poštanski broj">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="form-field-container">
-          <mat-select [formControl]="sex" placeholder="Odaberite spol">
-            <mat-option *ngFor="let option of sexes" [value]="option.name">
-              {{ option.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="form-field-container">
-          <mat-select [formControl]="behaviour" placeholder="Odaberite ponašanje">
-            <mat-option *ngFor="let option of behaviours" [value]="option.name">
-              {{ option.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-          <button mat-stroked-button (click)= getFilteredUsers()>Pretraži</button>
-          <button mat-stroked-button (click)= getAllUsers()>Reset</button>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
 
-        </td>
-    </tr>
-  </table>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControl]="postalCode" placeholder="Poštanski broj">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="form-field-container">
+        <mat-select [formControl]="sex" placeholder="Odaberite spol">
+          <mat-option *ngFor="let option of sexes" [value]="option.name">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="form-field-container">
+        <mat-select [formControl]="behaviour" placeholder="Odaberite ponašanje">
+          <mat-option *ngFor="let option of behaviours" [value]="option.name">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-flat-button (click)=getFilteredUsers() color="primary">Pretraži</button>
+      <mat-divider [vertical]="true"></mat-divider>
+      <button mat-flat-button (click)=cleanFilter() color="warn">Reset</button>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

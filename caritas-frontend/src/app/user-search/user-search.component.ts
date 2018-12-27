@@ -26,6 +26,7 @@ export class UserSearchComponent implements OnInit {
   behaviours: Behaviour[];
 
   @Output() filterOut = new EventEmitter<UserFilter>();
+  @Output() clean = new EventEmitter();
   
   constructor(private dropdownService: DropdownService, private userService: UserService) { }
 
@@ -84,8 +85,19 @@ export class UserSearchComponent implements OnInit {
       this.filterOut.emit(user);
   }
 
-  getAllUsers(){
-    
+  cleanFilter(){
+    this.name.reset();
+    this.surname.reset();
+    this.username.reset();
+    this.email.reset();
+    this.postalCode.reset();
+    this.birthday.reset();
+    this.sex.reset();
+    this.behaviour.reset();
+    this.oib.reset();
+
+    this.clean.emit();
+
   }
 
 }
